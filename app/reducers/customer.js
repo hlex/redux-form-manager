@@ -1,6 +1,30 @@
 const initialState = {
   firstname: '',
-  lastname: ''
+  lastname: '',
+  fatherName: '',
+  motherName: '',
+  age: '',
+  gender: '',
+  email: '',
+  contactMobileNumber: '',
+  contactNumber: '',
+  address: {
+    number: '',
+    moo: '',
+    village: '',
+    buildingName: '',
+    buildindRoom: '',
+    buildingFloor: '',
+    soi: '',
+    street: '',
+    subdistrict: '',
+    district: '',
+    province: '',
+    zipCode: ''
+  },
+  food: '',
+  drink: '',
+  shirtSize: ''
 }
 
 const customer = (state = initialState, action) => {
