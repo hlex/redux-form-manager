@@ -37,7 +37,7 @@ const bindFormValidation = (options, mapStateToValidationPriority, afterFieldCha
       }
       const propsToState = {
         validationPriority,
-        ...actions,
+        afterActions: actions,
         formData,
         dispatch
       }
@@ -59,13 +59,15 @@ const bindFormValidation = (options, mapStateToValidationPriority, afterFieldCha
       return {}
     }
     getFirstError = () => {
-      const { formValidation, validationPriority } = this.state
+      const { validationPriority } = this.state
+      const formValidation = this.validateForm()
       if (_h.isEmpty(formValidation)) return {}
       if (_h.isEmpty(validationPriority)) return this.popFirstError(formValidation)
       return this.popFirstErrorWithPriority(formValidation, validationPriority)
     }
-    dispatchValue = (value, key, error, actionType) => {
+    dispatchValue = (value, key) => {
       const { dispatch } = this.context.store
+      const actionType = this.getFieldActionType(key)
       if (_h.isEmpty(options.actionType)) {
         console.error('actionType is empty. Please send it to using in dispatch')
         return
@@ -75,12 +77,11 @@ const bindFormValidation = (options, mapStateToValidationPriority, afterFieldCha
         type: constant,
         value,
         key,
-        error,
         actionType
       })
     }
     dispatchAfterUpdate = (value, key, error) => {
-      if (!_h.isEmpty(this.state.actions[key])) this.state.actions[key](value, key, error)
+      if (!_h.isEmpty(this.state.afterActions[key])) this.state.afterActions[key](value, key, error)
     }
     getField = (key) => {
       return this.state.formData[key]
@@ -93,30 +94,24 @@ const bindFormValidation = (options, mapStateToValidationPriority, afterFieldCha
     }
     validateField = (value, key) => {
       const rules = this.getFieldRules(key)
-      const validated = validateRules(value, rules)
-      return validated
+      const errorMessage = validateRules(value, rules)
+      return {
+        key: key,
+        message: errorMessage
+      }
     }
-    // setValidation = (key, error) => {
-    //   const { formValidation } = this.state
-    //   if (_h.isEmpty(error)) {
-    //     console.warn('empty error write code to delete member in array')
-    //   } else if (!_h.includes(formValidation, [`${key}`])) {
-    //     console.warn('new error but have to check key includes in array or not ?')
-    //     this.setState({
-    //       formValidation: [
-    //         ...this.state.formValidation,
-    //         {
-    //           key: key,
-    //           message: error
-    //         }
-    //       ]
-    //     })
-    //   } else {
-    //     console.warn(`formValidation already had key ${key} that has error`)
-    //   }
-    // }
+    validateForm = () => {
+      const { formData } = this.state
+      const formValidation = []
+      for (const key in formData) {
+        const value = formData[key].value
+        if (key === undefined || value === undefined) console.error('key or value not found in field data')
+        const result = this.validateField(value, key)
+        if (!_h.isEmpty(result.message)) formValidation.push(result)
+      }
+      return formValidation
+    }
     onUpdateValidation = (key, error) => {
-      console.log('onUpdateValidation', key, error)
       this.setValidation(key, error)
     }
     onUpdateValue = (value = '', key = '') => {
@@ -124,23 +119,20 @@ const bindFormValidation = (options, mapStateToValidationPriority, afterFieldCha
         console.error('key is empty. It might be undefined "" or null')
         return
       }
-      const actionType = this.getFieldActionType(key)
-      const error = this.validateField(value, key)
-      console.log('onUpdateValue:value', value)
-      console.log('onUpdateValue:key', key)
-      console.log('onUpdateValue:error', error)
-      console.log('onUpdateValue:actionType', actionType)
-      // this.onUpdateValidation(key, error)
-      this.dispatchValue(value, key, error, actionType)
-      // this.dispatchAfterUpdate(value, key, error)
+      this.dispatchValue(value, key)
+      this.dispatchAfterUpdate(value, key)
     }
     renderInputField = (fieldData, renderUIInputField) => {
-      console.log('before render formData', this.state.formData)
+      const firstError = this.getFirstError()
+      const _fieldData = {
+        ...fieldData,
+        firstError: firstError
+      }
       if (renderUIInputField && typeof renderUIInputField === 'function') {
-        return this.props.renderUIInputField(fieldData, this.onUpdateValue)
+        return this.props.renderUIInputField(_fieldData, this.onUpdateValue)
       }
       if (options.renderUIInputField && typeof options.renderUIInputField === 'function') {
-        return options.renderUIInputField(fieldData, this.onUpdateValue)
+        return options.renderUIInputField(_fieldData, this.onUpdateValue)
       }
       console.error('Cannot render input field please define function renderUIInputField to return React Component')
       return 'Unable to render UIInputField'
