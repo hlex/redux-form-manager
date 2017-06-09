@@ -10,7 +10,7 @@ import _h from './helpers/index.js'
   }
 */
 const validateRules = (value, rules) => {
-  let errorMessage = ''
+  let errorMessage = false
   for (const ruleKey in rules) {
     const rule = rules[ruleKey] // rule could be string or object
     switch (ruleKey) {

@@ -24,7 +24,7 @@ function mapDispatchToProps(dispatch) {
 // ====================================================== BindFormValidation
 // Params ======================================================
 const mapStateToValidationPriority = (state) => {
-  return ['firstname', 'lastname', 'motherName', 'fatherName', 'age', 'gender', 'food', 'drink']
+  return ['food', 'drink', 'lastname', 'firstname', 'motherName', 'fatherName', 'age', 'gender']
 }
 
 const afterFieldChange = (dispatch, state) => {
@@ -50,9 +50,16 @@ const afterFieldChange = (dispatch, state) => {
 
 const options = {
   actionType: 'FORM/CHANGE/CUSTOMER',
-  form: (state) => createForm(state),
+  formData: (state) => createForm(state),
   renderUIInputField: (fieldData, updateValue) => {
-    return <InputField {...fieldData} onChange={updateValue} onBlur={updateValue}/>
+    console.log('fieldData', fieldData)
+    // return <InputField {...fieldData} onChange={updateValue} />
+    return (
+      <div>
+        <em>{fieldData.errorMessage || ''}</em>
+        <input value={fieldData.value} onChange={(e) => updateValue(e.target.value, fieldData.key)} />
+      </div>
+    )
   }
 }
 
@@ -93,7 +100,7 @@ export default class Demo extends React.Component {
             <div className='_center' style={{
               color: 'red'
             }}>
-              {`error: ${firstError.key} ${firstError.message}`}
+              {`error: ${firstError} ${firstError}`}
             </div>
           }
           <br />

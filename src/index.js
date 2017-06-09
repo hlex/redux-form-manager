@@ -1,3 +1,3 @@
-import bindFormValidation from './form'
+import bindFormValidation from './form2'
 
 export { bindFormValidation }

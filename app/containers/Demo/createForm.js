@@ -104,7 +104,7 @@ const createForm = (state) => {
         })
       ],
       label: 'Age',
-      value: customer.firstname,
+      value: customer.age,
       disabled: false,
       rules: {
         required: 'กรุณาระบุอายุ'
