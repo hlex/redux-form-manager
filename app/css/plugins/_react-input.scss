@@ -1,0 +1,60 @@
+.text-input .field-group { margin: 10px 0; }
+.text-input .field-group label { display: block; width: 100%; margin: 5px 0; color: #333; }
+.text-input input[type="text"].form-input { width: 100%; padding: 5px; border: 1px solid #bebebe; color: #333; transition: all .2s ease-in-out; box-shadow: 0px 0px 1px 1px transparent; outline: none; }
+.text-input input[type="text"].form-input:focus { box-shadow: 0px 0px 1px 1px #4087ff; border: 1px solid #4087ff; outline: none; }
+.text-input input[type="text"].form-input:disabled { background: #ebebe4; opacity: 0.9; }
+.text-input input[type="text"].form-input.error { border: 1px solid #FF0033; }
+.text-input input[type="text"].form-input.error:focus { box-shadow: 0px 0px 1px 1px #FF0033; outline: none; }
+.text-input .error-message { margin: 5px 0; font-size: 12px; color: #FF0033; }
+
+.number-input .field-group { margin: 10px 0; }
+.number-input .field-group label { display: block; width: 100%; margin: 5px 0; color: #333; }
+.number-input input[type="text"].form-input { width: 100%; padding: 5px; border: 1px solid #bebebe; color: #333; transition: all .2s ease-in-out; box-shadow: 0px 0px 1px 1px transparent; outline: none; }
+.number-input input[type="text"].form-input:focus { box-shadow: 0px 0px 1px 1px #4087ff; border: 1px solid #4087ff; outline: none; }
+.number-input input[type="text"].form-input:disabled { background: #ebebe4; opacity: 0.9; }
+.number-input input[type="text"].form-input.error { border: 1px solid #FF0033; }
+.number-input input[type="text"].form-input.error:focus { box-shadow: 0px 0px 1px 1px #FF0033; outline: none; }
+.number-input .error-message { margin: 5px 0; font-size: 12px; color: #FF0033; }
+
+.checkbox-input { display: inline-block; width: 100%; }
+.checkbox-input .checkbox-list { display: block; margin: 10px 0; }
+.checkbox-input label { display: inline-block; width: auto; vertical-align: middle; }
+
+.checkbox-input .box-input { display: inline-block; width: 20px; position: relative; margin-right: 15px; }
+.checkbox-input .box-input label.icon { width: 20px; height: 20px; top: 0; left: 0; border-radius: 2px; border: 1px solid #bebebe; transition: all .4s ease-in-out; box-shadow: 0px 0px 1px 1px transparent; outline: transparent auto 5px; }
+.checkbox-input .box-input label.icon:after { content: '\2714'; position: absolute; width: 65%; height: 80%; top: 50%; left: 50%; color: #333; background: transparent; transition: all .3s ease-in-out; transform: translate(-50%, -50%) scale(0); }
+.checkbox-input .box-input input[type="checkbox"] { position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0; z-index: 2; cursor: pointer; }
+.checkbox-input .box-input input[type="checkbox"]:checked ~ label.icon:after { transform: translate(-50%, -50%) scale(1); }
+.checkbox-input .box-input input[type="checkbox"]:disabled { cursor: default; pointer-events: none; }
+.checkbox-input .box-input input[type="checkbox"]:disabled ~ label.icon { background: #ebebe4; opacity: 0.9; pointer-events: none; }
+.checkbox-input .box-input input[type="checkbox"]:focus ~ label.icon, .checkbox-input .box-input input[type="checkbox"]:hover ~ label.icon { border: 1px solid #4087ff; box-shadow: 0 0 1px 1px #4087ff; outline: none; }
+
+.radio-input { display: inline-block; width: 100%; }
+.radio-input .radio-list { display: block; margin: 10px 0; }
+.radio-input label { display: inline-block; width: auto; vertical-align: middle; }
+
+.radio-input .box-input { display: inline-block; width: 20px; position: relative; margin-right: 15px; }
+.radio-input .box-input label.icon { width: 20px; height: 20px; top: 0; left: 0; border-radius: 100%; border: 1px solid #bebebe; transition: all .2s ease-in-out; box-shadow: 0px 0px 1px 1px transparent; outline: none; }
+.radio-input .box-input label.icon:after { content: ''; position: absolute; width: 50%; height: 50%; top: 50%; left: 50%; background: #333; border-radius: 100%; border: 1px solid #333; transform: translate(-50%, -50%); box-shadow: 0 0 1px 1px #333; transition: all .3s ease-in-out; transform: translate(-50%, -50%) scale(0); }
+.radio-input .box-input input[type="radio"] { position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0; z-index: 2; cursor: pointer; }
+.radio-input .box-input input[type="radio"]:checked ~ label.icon:after { transform: translate(-50%, -50%) scale(1); }
+.radio-input .box-input input[type="radio"]:disabled { cursor: default; pointer-events: none; }
+.radio-input .box-input input[type="radio"]:disabled ~ label.icon { background: #ebebe4; opacity: 0.9; pointer-events: none; }
+.radio-input .box-input input[type="radio"]:focus ~ label.icon, .radio-input .box-input input[type="radio"]:hover ~ label.icon { border: 1px solid #4087ff; box-shadow: 0 0 1px 1px #4087ff; outline: none; }
+
+.select-input .field-group { margin: 10px 0; }
+.select-input .field-group label { display: block; width: 100%; margin: 5px 0; color: #333; }
+.select-input select.form-input { width: 100%; padding: 5px; border: 1px solid #bebebe; color: #333; transition: all .2s ease-in-out; box-shadow: 0px 0px 1px 1px transparent; outline: none; }
+.select-input select.form-input:focus { box-shadow: 0px 0px 1px 1px #4087ff; border: 1px solid #4087ff; outline: none; }
+.select-input select.form-input:disabled { background: #ebebe4; opacity: 0.9; }
+.select-input select.form-input.error { border: 1px solid #FF0033; }
+.select-input select.form-input.error:focus { box-shadow: 0px 0px 1px 1px #FF0033; outline: none; }
+.select-input .error-message { margin: 5px 0; font-size: 12px; color: #FF0033; }
+
+.textarea-input .field-group { margin: 10px 0; }
+.textarea-input .field-group label { display: block; width: 100%; margin: 5px 0; color: #333; }
+.textarea-input textarea.form-input { width: 100%; padding: 5px; border: 1px solid #bebebe; color: #333; transition: all .2s ease-in-out; box-shadow: 0px 0px 1px 1px transparent; outline: none; }
+.textarea-input textarea.form-input:focus { box-shadow: 0px 0px 1px 1px #4087ff; border: 1px solid #4087ff; outline: none; }
+.textarea-input textarea.form-input.error { border: 1px solid #FF0033; }
+.textarea-input textarea.form-input.error:focus { box-shadow: 0px 0px 1px 1px #FF0033; outline: none; }
+.textarea-input .error-message { margin: 5px 0; font-size: 12px; color: #FF0033; }
