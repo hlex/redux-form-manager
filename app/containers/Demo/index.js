@@ -53,13 +53,13 @@ const options = {
   formData: (state) => createForm(state),
   renderUIInputField: (fieldData, updateValue) => {
     console.log('fieldData', fieldData)
-    // return <InputField {...fieldData} onChange={updateValue} />
-    return (
-      <div>
-        <em>{fieldData.errorMessage || ''}</em>
-        <input value={fieldData.value} onChange={(e) => updateValue(e.target.value, fieldData.key)} />
-      </div>
-    )
+    return <InputField {...fieldData} onChange={updateValue} />
+    // return (
+    //   <div>
+    //     <em>{fieldData.errorMessage || ''}</em>
+    //     <input value={fieldData.value} onChange={(e) => updateValue(e.target.value, fieldData.key)} />
+    //   </div>
+    // )
   }
 }
 
@@ -85,7 +85,7 @@ export default class Demo extends React.Component {
     // console.log('constructor float 4.223', 4.223.constructor)
     // console.log('constructor array of object [{}]', [{}].constructor) const y =
     // () => console.log('!') console.log('constructor function y', y.constructor)
-    const {formData, renderInputField, firstError} = this.props
+    const { formData, renderInputField, firstError } = this.props
     return (
       <div className='demo'>
         <div className='_center'>
@@ -100,7 +100,7 @@ export default class Demo extends React.Component {
             <div className='_center' style={{
               color: 'red'
             }}>
-              {`error: ${firstError} ${firstError}`}
+              {`error: ${firstError}`}
             </div>
           }
           <br />
