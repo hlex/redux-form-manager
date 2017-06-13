@@ -55,8 +55,7 @@ const bindFormValidation = (options, mapStateToValidationPriority, afterFieldCha
 
     renderInputField = (fieldData, renderUIInputField) => {
       const { value, rules } = fieldData
-      const errorMessage = getErrorMessage(value, rules)
-      if (errorMessage) fieldData.errorMessage = errorMessage
+      fieldData.errorMessage = getErrorMessage(value, rules)
       if (isFunction(renderUIInputField)) return renderUIInputField(fieldData, this.onUpdateValue)
       if (isFunction(options.renderUIInputField)) return options.renderUIInputField(fieldData, this.onUpdateValue)
       console.error('Cannot render input field please define function renderUIInputField to return React Component')
