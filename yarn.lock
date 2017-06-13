@@ -4860,9 +4860,9 @@ react-helmet@^5.0.3:
     prop-types "^15.5.4"
     react-side-effect "^1.1.0"
 
-react-input-forms@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/react-input-forms/-/react-input-forms-1.2.0.tgz#001c0a474ddc71e1e7518d82180f6b7b8cc7c8e4"
+react-input-forms@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/react-input-forms/-/react-input-forms-1.2.5.tgz#bc1b96587ab8fae762e3b5fe9a0e6609bcf85424"
   dependencies:
     node-sass "^4.5.3"
     npm "^4.6.1"
