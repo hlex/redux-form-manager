@@ -20,14 +20,14 @@
   ],
   "scripts": {
     "dev": "better-npm-run dev",
-    "build": "npm run clean && better-npm-run build",
-    "build:client": "npm run clean && better-npm-run build:client",
     "start": "better-npm-run start",
     "clean": "better-npm-run clean",
     "tester": "better-npm-run test",
     "test": "npm run lint && npm run tester",
     "lint": "eslint ./app/*/**.js",
-    "pub": "cross-env NODE_ENV=production babel --copy-files --out-dir dist --ignore *.spec.js src",
+    "prepublish": "npm version patch",
+    "build": "npm run clean && better-npm-run build",
+    "build:demo": "better-npm-run clean:demo && better-npm-run build:demo",
     "commit": "git-cz",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
@@ -40,13 +40,9 @@
       }
     },
     "build": {
-      "command": "webpack --progress --hide-modules --config ./configs/webpack.config.production.js",
-      "env": {
-        "NODE_ENV": "production",
-        "BUILD_ENV": "server"
-      }
+      "command": "cross-env NODE_ENV=production babel --copy-files --out-dir dist --ignore *.spec.js src"
     },
-    "build:client": {
+    "build:demo": {
       "command": "webpack --progress --hide-modules --config ./configs/webpack.config.production.js",
       "env": {
         "NODE_ENV": "production",
@@ -63,7 +59,10 @@
       "command": "mocha ./test/*.js --compilers js:babel-register --watch"
     },
     "clean": {
-      "command": "rimraf build"
+      "command": "rimraf dist"
+    },
+    "clean:demo": {
+      "command": "rimraf demo"
     }
   },
   "dependencies": {

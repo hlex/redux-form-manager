@@ -5,7 +5,7 @@ function resolvePath(pathName) {
 }
 
 module.exports = {
-  build: resolvePath('build'),
+  build: resolvePath('demo'),
   public: resolvePath('public'),
   htmlIndex: resolvePath('public/index.html'),
   htmlTemplate: resolvePath('public/template.html'),
