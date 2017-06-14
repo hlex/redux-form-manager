@@ -63,7 +63,7 @@ const options = {
   }
 }
 
-@bindFormValidation(options, mapStateToValidationPriority, afterFieldChange)
+@bindFormValidation(options, afterFieldChange, mapStateToValidationPriority)
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Demo extends React.Component {
   static propTypes = {
