@@ -1,5 +1,4 @@
-import { Component } from 'react'
-import PropTypes from 'prop-types'
+import { Component, PropTypes } from 'react'
 import validateRules from './validation'
 
 const isFunction = (func) => func && typeof func === 'function'
@@ -18,7 +17,7 @@ const getFirstError = (formData, priority) => {
   return ''
 }
 
-const bindFormValidation = (options, mapStateToValidationPriority, afterFieldChange) => (WrappedComponent) => {
+const bindFormValidation = (options, afterFieldChange, mapStateToValidationPriority) => (WrappedComponent) => {
   const { actionType = undefined, formData } = options
 
   return class FormValidation extends Component {
@@ -38,7 +37,11 @@ const bindFormValidation = (options, mapStateToValidationPriority, afterFieldCha
 
     onUpdateValue = (value, key) => {
       const { dispatch, getState } = this.context.store
-      const fieldActionType = formData(getState())[key].actionType
+      if (!formData(getState())[key]) {
+        console.error('Field key is not defined. Please create in reducer')
+        return
+      }
+      const fieldActionType = formData(getState())[key].actionType || ''
       if (actionType || fieldActionType) {
         dispatch({
           type: fieldActionType || actionType,
@@ -55,7 +58,8 @@ const bindFormValidation = (options, mapStateToValidationPriority, afterFieldCha
 
     renderInputField = (fieldData, renderUIInputField) => {
       const { value, rules } = fieldData
-      fieldData.errorMessage = getErrorMessage(value, rules)
+      const errorMessage = getErrorMessage(value, rules)
+      fieldData.errorMessage = errorMessage
       if (isFunction(renderUIInputField)) return renderUIInputField(fieldData, this.onUpdateValue)
       if (isFunction(options.renderUIInputField)) return options.renderUIInputField(fieldData, this.onUpdateValue)
       console.error('Cannot render input field please define function renderUIInputField to return React Component')
