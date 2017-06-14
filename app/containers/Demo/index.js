@@ -41,8 +41,8 @@ const afterFieldChange = (dispatch, state) => {
         type: 'FORM/CHANGE/CUSTOMER',
         key: 'drink',
         value: value === 'MALE'
-          ? 'Cola'
-          : 'Water'
+          ? [{ label: 'Cola', value: true }]
+          : [{ label: 'Water', value: true }]
       })
     }
   }

@@ -140,7 +140,7 @@ const createForm = (state) => {
         { label: 'Egg', value: 'egg' }
       ],
       value: customer.food,
-      disabled: false,
+      disabled: isMale,
       rules: {
         required: 'กรุณาเลือกรายการอาหาร'
       }

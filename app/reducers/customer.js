@@ -22,8 +22,8 @@ const initialState = {
     province: '',
     zipCode: ''
   },
-  food: '',
-  drink: '',
+  food: [],
+  drink: [],
   shirtSize: ''
 }
 
