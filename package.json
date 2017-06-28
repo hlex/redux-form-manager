@@ -2,6 +2,7 @@
   "name": "redux-form-manager",
   "version": "2.1.0",
   "description": "Redux form manager",
+  "main": "dist/index.js",
   "repository": {
     "url": "https:git@github.com:hlex/redux-form-manager.git",
     "type": "git"
@@ -28,7 +29,10 @@
     "build": "npm run clean && better-npm-run build",
     "build:demo": "better-npm-run clean:demo && better-npm-run build:demo",
     "commit": "git-cz",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "prerelease": "npm run build && npm version minor && git push origin master --tags",
+    "release": "npm publish",
+    "postrelease": "git commit -m 'fix: release' && git push"
   },
   "betterScripts": {
     "dev": {
