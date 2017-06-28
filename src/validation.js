@@ -1,14 +1,4 @@
-import _h from './helpers/index.js'
 
-/*
-  rules: {
-    required: 'กรุณาระบุชื่อ',
-    maxLength: {
-      value: 13,
-      message: 'Hello'
-    }
-  }
-*/
 const validateRules = (value, rules) => {
   let errorMessage = false
   for (const ruleKey in rules) {
@@ -16,13 +6,18 @@ const validateRules = (value, rules) => {
     switch (ruleKey) {
       case 'required':
       case 'require':
-        errorMessage = _h.isEmpty(value) ? rule : ''
+        errorMessage = value === '' ? rule : ''
         break
-      case 'maxLength':
-        errorMessage = value.length <= rule.value.length ? rule : ''
+
+      case 'customValidate':
+        for (let i = 0; i < rules.customValidate.length; i++) {
+          if (value !== '' && !rules.customValidate[i].validate(value)) {
+            errorMessage = rules.customValidate[i].massage
+            break
+          }
+        }
         break
-      case 'customerValidate':
-        break
+
       default:
         errorMessage = ''
         break
