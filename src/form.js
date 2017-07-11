@@ -1,4 +1,5 @@
 import { Component, PropTypes } from 'react'
+import _ from 'lodash'
 import validateRules from './validation'
 
 const isFunction = (func) => func && typeof func === 'function'
@@ -37,19 +38,20 @@ const bindFormValidation = (options, afterFieldChange, mapStateToValidationPrior
 
     onUpdateValue = (value, key) => {
       const { dispatch, getState } = this.context.store
-      if (!formData(getState())[key]) {
-        console.error('Field key is not defined. Please create in reducer')
+      const fieldData = _.get(formData(getState()), key)
+      if (!fieldData) {
+        console.error(`Cannot get fieldData in formData at key ${key}. Please recheck your fieldData key`)
         return
       }
-      const fieldActionType = formData(getState())[key].actionType || ''
+      const fieldActionType = fieldData.actionType || ''
       if (actionType || fieldActionType) {
         dispatch({
           type: fieldActionType || actionType,
           key,
           value
         })
-        if (isFunction(afterFieldChange) && isFunction(afterFieldChange(dispatch, getState())[key])) {
-          afterFieldChange(dispatch, getState())[key](value, key)
+        if (isFunction(afterFieldChange) && isFunction(afterFieldChange(dispatch, _.get(getState(), key)))) {
+          afterFieldChange(dispatch, _.get(getState(), key), (value, key))
         }
       } else {
         console.error('actionType is empty. Please send it to using in dispatch')
