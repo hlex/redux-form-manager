@@ -52,7 +52,7 @@ const options = {
   actionType: 'FORM/CHANGE/CUSTOMER',
   formData: (state) => createForm(state),
   renderUIInputField: (fieldData, updateValue) => {
-    console.log('fieldData', fieldData)
+    // console.log('fieldData', fieldData)
     return <InputField {...fieldData} onChange={updateValue} />
     // return (
     //   <div>
@@ -131,6 +131,14 @@ export default class Demo extends React.Component {
             </div>
             <div className='D-6'>
               {renderInputField(formData.drink)}
+            </div>
+          </div>
+          <div className='row'>
+            <div className='D-6'>
+              {renderInputField(formData.products[0].name)}
+            </div>
+            <div className='D-6'>
+              {renderInputField(formData.products[0].code)}
             </div>
           </div>
         </div>
