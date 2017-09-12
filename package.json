@@ -68,7 +68,10 @@
       "command": "rimraf demo"
     }
   },
-  "dependencies": {
+  "peerDependencies": {
+    "react": "^15.4.2"
+  },
+  "devDependencies": {
     "babel-core": "^6.23.1",
     "babel-loader": "^7.0.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
@@ -87,9 +90,7 @@
     "react-router-redux": "^4.0.8",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.1",
-    "redux-thunk": "^2.2.0"
-  },
-  "devDependencies": {
+    "redux-thunk": "^2.2.0",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "babel-preset-es2015": "^6.24.1",
