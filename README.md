@@ -22,7 +22,7 @@ This project uses library React, Redux, React-Redux and ES2015 syntax, so make s
 - Redux http://redux.js.org/
 - React-Redux https://github.com/reactjs/react-redux
 ## Fast date with Demo & Examples
-Live demo: hlex.github.io/redux-form-manager
+Live demo: <https://hlex.github.io/redux-form-manager/demo>
 
 The live demo is still running redux-form-manager v2.5.0
 

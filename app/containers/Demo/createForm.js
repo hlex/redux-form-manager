@@ -49,9 +49,9 @@ const createForm = (state) => {
         customValidate: [
           {
             valid: (value) => {
-              return value.indexOf('@') > 0
+              return value.indexOf('redux') > 0
             },
-            message: 'รูปแบบ email ไม่ถูกต้อง'
+            message: 'ต้องมีคำว่า redux'
           }
         ]
       }
