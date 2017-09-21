@@ -33,7 +33,6 @@ const getRandomInt = (min, max) => {
 const createForm = (state) => {
   const { customer } = state
   const isMale = customer.gender === 'MALE'
-  console.log('isMale', isMale)
   return {
     firstname: {
       actionType: 'FORM/CHANGE/CUSTOMER',
@@ -78,7 +77,7 @@ const createForm = (state) => {
       label: 'Father name',
       value: customer.fatherName,
       disabled: false,
-      hidden: true,
+      hidden: false,
       rules: {
         required: 'กรุณาระบุชื่อพ่อ'
       }

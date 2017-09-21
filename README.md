@@ -217,10 +217,10 @@ class MyInputComponent extends Component {
 }
 
 ```
-You can find more feature's examples in [DOC.MD](<https://github.com/hlex/redux-form-manager/DOC.MD>)
+You can find more feature's examples in [DOC.MD](<https://github.com/hlex/redux-form-manager/blob/master/DOC.md>)
 
 ## Documentation
-Read more [DOC.MD](<https://github.com/hlex/redux-form-manager/DOC.MD>)
+Read more [DOC.MD](<https://github.com/hlex/redux-form-manager/blob/master/DOC.md>)
 
 ## Contributions
 ### Looking for.
