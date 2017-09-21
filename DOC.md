@@ -73,6 +73,7 @@ const createForm = (state) => {
   return {
     firstname: {
       type: 'input',
+      name: 'firstname',
       label: 'Firstname',
       value: '',
       placeholder: 'write down your firstname',
@@ -84,13 +85,14 @@ const createForm = (state) => {
     },
     lastname: {
       type: 'input',
-      label: 'Firstname',
+      name: 'lastname',
+      label: 'Lastname',
       value: '',
-      placeholder: 'write down your firstname',
+      placeholder: 'write down your lastname',
       disabled: false,
       hidden: false,
       rules: [
-        required: 'Please fill in your firstname.'
+        required: 'Please fill in your lastname.'
       ],
     }
   }

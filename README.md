@@ -126,6 +126,7 @@ const createForm = (state) => {
   return {
     firstname: {
       type: 'input',
+      name: 'firstname',
       label: 'Firstname',
       value: '',
       placeholder: 'write down your firstname',
@@ -135,15 +136,16 @@ const createForm = (state) => {
         required: 'Please fill in your firstname.'
       ],
     },
-    firstname: {
+    lastname: {
       type: 'input',
-      label: 'Firstname',
+      name: 'lastname',
+      label: 'Lastname',
       value: '',
-      placeholder: 'write down your firstname',
+      placeholder: 'write down your lastname',
       disabled: false,
       hidden: false,
       rules: [
-        required: 'Please fill in your firstname.'
+        required: 'Please fill in your lastname.'
       ],
     }
   }
@@ -174,12 +176,8 @@ export default class Form extends Component {
     return (
       <div>
         <h1>Form</h1>
-        {
-          renderInputField(formData.firstname)
-        }
-        {
-          renderInputField(formData.lastname)
-        }
+        { renderInputField(formData.firstname) }
+        { renderInputField(formData.lastname) }
         <h4>error: {firstError}</h4>
       </div>
     )
@@ -219,10 +217,10 @@ class MyInputComponent extends Component {
 }
 
 ```
-You can find more feature's examples in [GUIDE.MD](<https://github.com/hlex/redux-form-manager/GUIDE.MD>)
+You can find more feature's examples in [DOC.MD](<https://github.com/hlex/redux-form-manager/DOC.MD>)
 
 ## Documentation
-Read more [GUIDE.MD](<https://github.com/hlex/redux-form-manager/GUIDE.MD>)
+Read more [DOC.MD](<https://github.com/hlex/redux-form-manager/DOC.MD>)
 
 ## Contributions
 ### Looking for.
