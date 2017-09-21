@@ -5,7 +5,6 @@ A Form control built with and for React with Redux. Initially built for use in R
 ### If you liked, gimme a star, Thanks.
 
 ## Special Thanks to 'GA-MO'
----
 [![alt text][logo]](https://github.com/GA-MO)
 
 [logo]: https://avatars2.githubusercontent.com/u/18608702?v=4&s=400 "GA-MO"
@@ -17,14 +16,12 @@ React Component boilerplate for creating new React Compoment and everything you 
 I recommend you to use it if you wanna create some awesome component for this world !
 
 ## Prerequisite
----
 This project uses library React, Redux, React-Redux and ES2015 syntax, so make sure that you are capable with it.
 - ES2015 https://babeljs.io/learn-es2015/
 - React https://facebook.github.io/react/
 - Redux http://redux.js.org/
 - React-Redux https://github.com/reactjs/react-redux
 ## Fast date with Demo & Examples
----
 Live demo: hlex.github.io/redux-form-manager
 
 The live demo is still running redux-form-manager v2.5.0
@@ -37,16 +34,7 @@ $ npm run dev
 ```
 it will serve at `localhost:9000`
 
-## Benefits
----
-
-
-## Flexibility
----
-
-
 ## Getting Started
----
 ```
 $ npm install redux-form-manager --save
 ```
@@ -56,7 +44,6 @@ $ yarn add redux-form-manager --save
 ```
 
 ## Basic Usage: Just copy paste
----
 Create new js file and then copy following codes
 ```js
 import React, { Component } from 'react'
@@ -120,7 +107,6 @@ Boom! you got a form with field that could be validated, your page also.
 Look at your console that
 
 ## Advanced Usage: Reveal Key Features
----
 There are many features we have provided
 - Building your own custom UI.
 - Validating each field by priority.
@@ -233,20 +219,16 @@ class MyInputComponent extends Component {
 }
 
 ```
-You can find more feature's examples in [GUIDE.MD](<https://github.com/hlex/redux-form-manager/Documentation.MD>)
+You can find more feature's examples in [GUIDE.MD](<https://github.com/hlex/redux-form-manager/GUIDE.MD>)
 
 ## Documentation
----
-Read more [GUIDE.MD](<https://github.com/hlex/redux-form-manager/Documentation.MD>)
+Read more [GUIDE.MD](<https://github.com/hlex/redux-form-manager/GUIDE.MD>)
 
 ## Contributions
----
 ### Looking for.
----
 
 ## Contributing
 ### just clone and pull request.
----
 
 #### Please open any issues, I will solve it as fast as possible.
 #### Contact me mondit.thum@gmail.com

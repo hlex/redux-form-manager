@@ -21,11 +21,9 @@
 
 
 ## <a id="concept"></a>Concept
----
 
 
 ## <a id="setup"></a>Setup
----
 install npm packages
 ```
 $ npm install redux-form-manager --save
@@ -47,7 +45,6 @@ bindFormValidation is a higher order function that return function which grant c
 
 
 ## <a id="core"></a>Core
----
 core is an object to assign variables to bindFormValidation()
 ### all of these keys are required. (Please copy them)
 
@@ -67,7 +64,6 @@ defaultActionType is a default actionType of store.dispatch when you didn't send
 
 
 ## <a id="working-example"></a>Working Example
----
 Create new js file and then copy following codes
 ```js
 import React, { Component } from 'react'
@@ -129,7 +125,6 @@ export default class Form extends Component {
 ```
 
 ## <a id="form-data"></a>Form Data
----
 ### The common variable of this package is 'formData'
 formData is a metadata of the form which it's type is Object. you can describe properties of your form in this variable. In any formData, it contains many fieldDatas.
 
@@ -151,7 +146,6 @@ const formData = {
 ```
 
 ## <a id="field-data"></a>Field Data
----
 ### Another variable of this package, 'fieldData'
 fieldData is an Object that define properties of the field. For example, firstname field would have properties like this
 ### Field Data Schema
@@ -181,33 +175,25 @@ const firstname = {
 ```
 
 ## <a id="feature-custom-ui"></a>Custom UI
----
 Building your own custom UI.
 
 ## <a id="feature-validation-priority"></a>mapStateToValidationPriority
----
 Validating each field by priority.
 
 ## <a id="feature-after-update"></a>afterFieldChange
----
 Doing after update function when any field dispatch.
 
 ## <a id="feature-customize-action"></a>actionType
----
 Customizing action type of each field.
 
 ## <a id="feature-custom-validation"></a>Custom Validation Rules
----
 Creating custom validation rules.
 
 ## <a id="feature-nested-field"></a>Nested Field Data
----
 Using Nested field data such as array of object.
 
 ## <a id="feature-dynamic-field-props"></a>Dynamic Field Data properties
----
 Handling dynamic field properties.
 
 ## <a id="feature-dispatch-firsterror"></a>Dispatch firsterror
----
 Dispatch firstError to outside container.
