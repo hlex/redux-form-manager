@@ -6,18 +6,18 @@ const getErrorMessage = (value, rules) => validateRules(value, rules)
 const getFirstError = (formData, priority) => {
   if (priority) {
     for (const key of priority) {
-      const errorMessage = getErrorMessage(formData[key].value, formData[key].rules)
+      const errorMessage = formData[key].hidden ? '' : getErrorMessage(formData[key].value, formData[key].rules)
       if (errorMessage) return errorMessage
     }
   }
   for (const key in formData) {
-    const errorMessage = getErrorMessage(formData[key].value, formData[key].rules)
+    const errorMessage = formData[key].hidden ? '' : getErrorMessage(formData[key].value, formData[key].rules)
     if (errorMessage) return errorMessage
   }
   return ''
 }
 
-const bindFormValidation = (options, afterFieldChange, mapStateToValidationPriority) => (WrappedComponent) => {
+const bindFormValidation = (options, afterFieldChange = {}, mapStateToValidationPriority = []) => (WrappedComponent) => {
   const { actionType = undefined, formData } = options
 
   return class FormValidation extends Component {

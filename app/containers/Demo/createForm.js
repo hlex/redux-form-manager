@@ -11,12 +11,12 @@
   disabled: '', // true or false
   rules: { // validation rules
     required: 'กรุณาระบุชื่อ',
-    customerValidate: [
-      email: (value) => {
-        return value.indexOf('@') > 0
-      },
-      myname: (value) => {
-        return value === 'myname'
+    customValidate: [
+      {
+        valid: (value) => {
+          return value.indexOf('@') > 0
+        },
+        message: 'รูปแบบ email ไม่ถูกต้อง'
       }
     ]
   }
@@ -45,7 +45,15 @@ const createForm = (state) => {
       value: customer.firstname,
       disabled: false,
       rules: {
-        required: 'กรุณาระบุชื่อ'
+        required: 'กรุณาระบุชื่อ',
+        customValidate: [
+          {
+            valid: (value) => {
+              return value.indexOf('@') > 0
+            },
+            message: 'รูปแบบ email ไม่ถูกต้อง'
+          }
+        ]
       }
     },
     lastname: {
@@ -70,6 +78,7 @@ const createForm = (state) => {
       label: 'Father name',
       value: customer.fatherName,
       disabled: false,
+      hidden: true,
       rules: {
         required: 'กรุณาระบุชื่อพ่อ'
       }

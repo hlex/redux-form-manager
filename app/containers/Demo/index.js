@@ -1,7 +1,7 @@
 import React from 'react'
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
-import {bindFormValidation} from '../../../src/index'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { bindFormValidation } from '../../../src/index'
 import createForm from './createForm'
 import InputField from 'react-input-forms'
 
@@ -23,8 +23,8 @@ function mapDispatchToProps(dispatch) {
 
 // ====================================================== BindFormValidation
 // Params ======================================================
-const mapStateToValidationPriority = (state) => {
-  return ['food', 'drink', 'lastname', 'firstname', 'motherName', 'fatherName', 'age', 'gender']
+const mapStateToValidationPriority = state => {
+  return []
 }
 
 const afterFieldChange = (dispatch, state) => {
@@ -40,9 +40,10 @@ const afterFieldChange = (dispatch, state) => {
       dispatch({
         type: 'FORM/CHANGE/CUSTOMER',
         key: 'drink',
-        value: value === 'MALE'
-          ? [{ label: 'Cola', value: true }]
-          : [{ label: 'Water', value: true }]
+        value:
+          value === 'MALE'
+            ? [{ label: 'Cola', value: true }]
+            : [{ label: 'Water', value: true }]
       })
     }
   }
@@ -50,7 +51,7 @@ const afterFieldChange = (dispatch, state) => {
 
 const options = {
   actionType: 'FORM/CHANGE/CUSTOMER',
-  formData: (state) => createForm(state),
+  formData: state => createForm(state),
   renderUIInputField: (fieldData, updateValue) => {
     // console.log('fieldData', fieldData)
     return <InputField {...fieldData} onChange={updateValue} />
@@ -68,9 +69,8 @@ const options = {
 export default class Demo extends React.Component {
   static propTypes = {
     // name: React.PropTypes.string,
-  };
+  }
   render() {
-    console.log('Demo', this.props)
     // console.log('typeof string 5555', typeof '5555') console.log('typeof interger
     // 5', typeof 5) console.log('typeof object {}', typeof {}) console.log('typeof
     // array []', typeof []) console.log('typeof float 4.2', typeof 4.2)
@@ -89,49 +89,40 @@ export default class Demo extends React.Component {
     return (
       <div className='demo'>
         <div className='_center'>
-          <br/>
-          <h1>Hello, I am Demo</h1>
+          <br />
+          <h1>Redux Form Manager</h1>
         </div>
-        <div className='container' style={{
-          padding: '15px 100px'
-        }}>
-          {
-            !_.isEmpty(firstError) &&
-            <div className='_center' style={{
-              color: 'red'
-            }}>
+        <div
+          className='container'
+          style={{
+            padding: '15px 100px'
+          }}
+        >
+          {!_.isEmpty(firstError) && (
+            <div
+              className='_center'
+              style={{
+                color: 'red'
+              }}
+            >
               {`error: ${firstError}`}
             </div>
-          }
+          )}
           <br />
           <br />
           <div className='row'>
-            <div className='D-6'>
-              {renderInputField(formData.firstname)}
-            </div>
-            <div className='D-6'>
-              {renderInputField(formData.lastname)}
-            </div>
-            <div className='D-6'>
-              {renderInputField(formData.fatherName)}
-            </div>
-            <div className='D-6'>
-              {renderInputField(formData.motherName)}
-            </div>
-            <div className='D-6 _vcenter'>
-              {renderInputField(formData.age)}
-            </div>
+            <div className='D-6'>{renderInputField(formData.firstname)}</div>
+            <div className='D-6'>{renderInputField(formData.lastname)}</div>
+            <div className='D-6'>{renderInputField(formData.fatherName)}</div>
+            <div className='D-6'>{renderInputField(formData.motherName)}</div>
+            <div className='D-6 _vcenter'>{renderInputField(formData.age)}</div>
             <div className='D-6 _vcenter'>
               {renderInputField(formData.gender)}
             </div>
           </div>
           <div className='row'>
-            <div className='D-6'>
-              {renderInputField(formData.food)}
-            </div>
-            <div className='D-6'>
-              {renderInputField(formData.drink)}
-            </div>
+            <div className='D-6'>{renderInputField(formData.food)}</div>
+            <div className='D-6'>{renderInputField(formData.drink)}</div>
           </div>
           <div className='row'>
             <div className='D-6'>

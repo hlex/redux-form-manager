@@ -111,7 +111,7 @@ const validateRules = (value, rules) => {
       case 'customValidate':
         for (let i = 0; i < rules.customValidate.length; i++) {
           if (value !== '' && !rules.customValidate[i].valid(value)) {
-            errorMessage = rules.customValidate[i].massage
+            errorMessage = rules.customValidate[i].message
             break
           }
         }
