@@ -1,4 +1,5 @@
-import { Component, PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import validateRules from './validation'
 
 const isFunction = (func) => func && typeof func === 'function'
@@ -20,7 +21,7 @@ const getFirstError = (formData, priority) => {
 const bindFormValidation = (options, afterFieldChange = {}, mapStateToValidationPriority = []) => (WrappedComponent) => {
   const { actionType = undefined, formData } = options
 
-  return class FormValidation extends Component {
+  return class FormValidation extends React.Component {
     static contextTypes = {
       store: PropTypes.shape({})
     }
