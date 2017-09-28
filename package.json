@@ -30,7 +30,7 @@
     "build:demo": "better-npm-run clean:demo && better-npm-run build:demo",
     "commit": "git-cz",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "prerelease": "npm version minor && npm run build && git push origin master --tags",
+    "prerelease": "npm version minor && npm run build && git push origin master --tags && npm adduser",
     "release": "npm publish",
     "postrelease": "git commit -m 'fix: release' && git push"
   },
