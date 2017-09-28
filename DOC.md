@@ -17,6 +17,7 @@
   - [Using Nested field data such as array of object.](#feature-nested-field)
   - [Handling dynamic field properties.](#feature-dynamic-field-props)
   - [Dispatch firstError to outside container.](#feature-dispatch-firsterror)
+  - [Using other event to dispatch.](#feature-other-dispatch)
 
 
 
@@ -199,3 +200,6 @@ Handling dynamic field properties.
 
 ## <a id="feature-dispatch-firsterror"></a>Dispatch firsterror
 Dispatch firstError to outside container.
+
+## <a id="feature-other-dispatch"></a>Other Dispatchs
+Using other event to dispatch.
