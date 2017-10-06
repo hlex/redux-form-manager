@@ -32,13 +32,13 @@ const bindFormValidation = (options, afterFieldChange = {}, mapStateToValidation
 
     componentWillMount = () => {
       const { getState, subscribe } = this.context.store
-      subscribe(() => this.setState({ formData: formData(getState()) }))
-      this.setState({ formData: formData(getState()) })
+      subscribe(() => this.setState({ formData: formData(getState(), this.props) }))
+      this.setState({ formData: formData(getState(), this.props) })
     }
 
     onUpdateValue = (value, key) => {
       const { dispatch, getState } = this.context.store
-      const fieldData = formData(getState())[key]
+      const fieldData = formData(getState(), this.props)[key]
       if (!fieldData) {
         console.error(`Cannot get fieldData in formData at key ${key}. Please recheck your fieldData key`)
         return

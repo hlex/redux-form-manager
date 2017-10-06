@@ -180,6 +180,18 @@ const firstname = {
 ## <a id="feature-custom-ui"></a>Custom UI
 Building your own custom UI.
 
+```js
+renderCustomerUI = () => {
+
+}
+render() {
+  const { formData, renderInputField, firstError } = this.props
+  return {
+
+  }
+}
+```
+
 ## <a id="feature-validation-priority"></a>mapStateToValidationPriority
 Validating each field by priority.
 

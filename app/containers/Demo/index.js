@@ -51,7 +51,9 @@ const afterFieldChange = (dispatch, state) => {
 
 const options = {
   actionType: 'FORM/CHANGE/CUSTOMER',
-  formData: state => createForm(state),
+  formData: (state, props) => {
+    return createForm(state)
+  },
   renderUIInputField: (fieldData, updateValue) => {
     return <InputField {...fieldData} onChange={updateValue} />
   }
