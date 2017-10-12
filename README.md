@@ -22,6 +22,7 @@ This project uses library React-Redux-Gamo-boilerplate, React, Redux, React-Redu
 - React https://facebook.github.io/react/
 - Redux http://redux.js.org/
 - React-Redux https://github.com/reactjs/react-redux
+
 ## Fast date with Demo & Examples
 Live demo: <https://hlex.github.io/redux-form-manager/demo>
 
@@ -44,11 +45,71 @@ or if you prefer yarn..
 $ yarn add redux-form-manager
 ```
 
+## WARNING !
+### Basically, we are using loganfsmyth/babel-plugin-transform-decorators-legacy (@ symbol) in any tutorials so make sure that you have added it in your .babelrc
+Read more about [loganfsmyth/babel-plugin-transform-decorators-legacy](https://github.com/loganfsmyth/babel-plugin-transform-decorators-legacy)
+### if you don't want to, let's using this format to activate instead.
+
+### Stand Alone
+```js
+export default bindFormValidation(core, afterFieldChange, mapStateToValidationPriority)(YourContainer)
+```
+
+### With Connect (React-Redux)
+```js
+const connectedComponent = connect(mapStateToProps, mapDispatchToProps)(YourContainer)
+export default bindFormValidation(core, afterFieldChange, mapStateToValidationPriority)(
+  connectedComponent
+)
+```
+
+## Advanced Usage: Reveal Key Features
+There are many features we have provided
+- [Rendering User Interface with any React Components.](#feature-custom-ui)
+- [Doing things after update function when any fields dispatched.](#feature-after-update)
+- [Creating custom validation rules.](#feature-custom-validation)
+- [Handling dynamic field properties.](#feature-dynamic-field-props)
+- [Customizing action type of each field.](#feature-customize-action)
+- [Validating each field by priority.](#feature-validation-priority)
+- [Using Nested field data such as array of object.](#feature-nested-field)
+- [Dispatch firstError to outside container.](#feature-dispatch-firsterror)
+- [Using other event to dispatch.](#feature-other-dispatch)
+
 ## Basic Usage: Just copy paste
 Create new js file and then copy following codes
 ```js
 import React, { Component } from 'react'
-import InputField, { bindFormValidation } from 'redux-form-manager'
+import { bindFormValidation } from 'redux-form-manager'
+
+class TextInputField extends Component {
+  handleChange = (e) => {
+    const { onChange } = this.props
+    onChange(e.target.value)
+  }
+  render = () => {
+    const {
+      label,
+      value,
+      disable,
+      placeholder,
+      hidden,
+      errorMessage,
+    } = this.props
+    return (
+      <div className={`box-form-input ${hidden && 'hidden'}`}>
+        <label>{label}</label>
+        <input
+          type='text',
+          value={value}
+          disabled={disabled}
+          placeholder={placeholder}
+          onChange={this.handleChange}
+        />
+        <div className='error-message'>{errorMessage}</div>
+      </div>
+    )
+  }
+}
 
 const createForm = (state) => {
   return {
@@ -80,10 +141,10 @@ const createForm = (state) => {
 }
 
 const core = {
-  defaultActionType: 'FORM/CHANGE/CUSTOMER',
+  actionType: 'FORM/CHANGE/CUSTOMER',
   formData: (state, props) => createForm(state),
   renderUIInputField: (fieldData, updateValue) => {
-    return <InputField {...fieldData} onChange={updateValue} />
+    return <TextInputField {...fieldData} onChange={updateValue} />
   }
 }
 
@@ -94,12 +155,8 @@ export default class Form extends Component {
     return (
       <div>
         <h1>Form</h1>
-        {
-          renderInputField(formData.firstname)
-        }
-        {
-          renderInputField(formData.lastname)
-        }
+        {renderInputField(formData.firstname)}
+        {renderInputField(formData.lastname)}
         <h4>error: {firstError}</h4>
       </div>
     )
@@ -108,18 +165,6 @@ export default class Form extends Component {
 ```
 Boom! you got a form with field that could be validated, your page also.
 Look at your console that
-
-## Advanced Usage: Reveal Key Features
-There are many features we have provided
-- [Building your own custom UI.](#feature-custom-ui)
-- [Validating each field by priority.](#feature-validation-priority)
-- [Doing after update function when any field dispatch.](#feature-after-update)
-- [Customizing action type of each field.](#feature-customize-action)
-- [Creating custom validation rules.](#feature-custom-validation)
-- [Using Nested field data such as array of object.](#feature-nested-field)
-- [Handling dynamic field properties.](#feature-dynamic-field-props)
-- [Dispatch firstError to outside container.](#feature-dispatch-firsterror)
-- [Using other event to dispatch.](#feature-other-dispatch)
 
 # Documentation
 ## Table of Contents
@@ -132,13 +177,14 @@ There are many features we have provided
   - [Form Data](#form-data)
   - [Field Data](#field-data)
 - ### Features
-  - [Building your own custom UI.](#feature-custom-ui)
-  - [Validating each field by priority.](#feature-validation-priority)
-  - [Doing after update function when any field dispatch.](#feature-after-update)
-  - [Customizing action type of each field.](#feature-customize-action)
+  - [Rendering User Interface with any React Components.](#feature-switch-ui)
+  - [Customizing RenderInputField function.](#feature-custom-ui)
+  - [Doing things after update function when any fields dispatched.](#feature-after-update)
   - [Creating custom validation rules.](#feature-custom-validation)
-  - [Using Nested field data such as array of object.](#feature-nested-field)
   - [Handling dynamic field properties.](#feature-dynamic-field-props)
+  - [Customizing action type of each field.](#feature-customize-action)
+  - [Validating each field by priority.](#feature-validation-priority)
+  - [Using Nested field data such as array of object.](#feature-nested-field)
   - [Dispatch firstError to outside container.](#feature-dispatch-firsterror)
   - [Using other event to dispatch.](#feature-other-dispatch)
 
@@ -159,10 +205,69 @@ $ yarn add redux-form-manager --save
 
 import library at the start of your js file
 ```js
-import InputField, { bindFormValidation } from 'redux-form-manager'
+import { bindFormValidation } from 'redux-form-manager'
 ```
 ### InputField
-InputField is a component that can morph to other inputs by defining props 'type' such as text, select, checkbox, radio etc.
+InputField is a UI component that receive event from user. You can create any JSX UI as you want. You just reminded that binding function props with renderUIInputField updateValue.
+
+```js
+import React, { Component } from 'react'
+class TextInputField extends Component {
+  handleChange = (e) => {
+    const { onUpdateValue } = this.props
+    onUpdateValue(e.target.value)
+  }
+  render = () => {
+    const {
+      label,
+      value,
+      disable,
+      placeholder,
+      hidden,
+      errorMessage,
+    } = this.props
+    return (
+      <div className={`box-form-input ${hidden && 'hidden'}`}>
+        <label>{label}</label>
+        <input
+          type='text',
+          value={value}
+          disabled={disabled}
+          placeholder={placeholder}
+          onChange={this.handleChange}
+        />
+        <div className='error-message'>{errorMessage}</div>
+      </div>
+    )
+  }
+}
+```
+
+### Tips for InputField
+You can create InputField Component that can morph to other inputs by defining props 'type' such as text, select, checkbox, radio etc.
+
+```js
+import React, { Component } from 'react'
+
+import TextInput from 'your/component/path'
+import SelectInput from 'your/component/path'
+
+class InputField extends Component {
+  render() {
+    switch (type) {
+      case 'text':
+        return <TextInput {...this.props}></TextInput>
+      case 'select':
+        return <SelectInput {...this.props}></SelectInput>
+      default:
+        return <TextInput {...this.props}></TextInput>
+    }
+  }
+}
+
+export default InputField
+
+```
 
 ### bindFormValidation()
 bindFormValidation is a higher order function that return function which grant component to have form manager modules which are 'formData', 'renderInputField()', 'firstError'
@@ -226,6 +331,7 @@ const core = {
   actionType: 'FORM/CHANGE/CUSTOMER',
   formData: (state, props) => createForm(state),
   renderUIInputField: (fieldData, updateValue) => {
+    switch (fieldData.type)
     return <InputField {...fieldData} onChange={updateValue} />
   }
 }
@@ -275,17 +381,21 @@ const formData = {
 ## <a id="field-data"></a>Field Data
 ### Another variable of this package, 'fieldData'
 fieldData is an Object that define properties of the field. For example, firstname field would have properties like this
-### Field Data Schema
+### Field Data Schema (Recommended)
 | Property        |     Type
 | ------------- |:-------------:
-| name | String
+| name | String (*)
+| value | String, Object (*)
+| rules | Object (*)
 | type      | String
 | label    | String
-| value | String, Object
 | placeholder | String
 | disabled |    Boolean
 | hidden | Boolean
-| rules | Object
+
+(*) is required
+
+### You can add any keys as your Component need.
 
 we can define fieldData as follow.
 ```js
@@ -303,13 +413,94 @@ const firstname = {
 },
 ```
 
+## <a id="feature-switch-ui"></a>Switch UI
+In ordinary form, we know that there are many input types such as 'text', 'select', 'radio', 'checkbox' etc. In redux-form-manager we also provide you to config your input type.
+
+### just switch (case) in renderUIInputField
+
+```js
+import React, { Component } from 'react'
+import { bindFormValidation } from 'redux-form-manager'
+
+import TextInput from 'your/component/path'
+import SelectInput from 'your/component/path'
+
+const createForm = (state) => {
+  return {
+    firstname: {
+      name: 'firstname',
+      type: 'text',
+      label: 'Firstname',
+      value: '',
+      placeholder: 'write down your firstname',
+      disabled: false,
+      hidden: false,
+      rules: {
+        required: 'Please fill in your firstname.'
+      },
+    },
+    age: {
+      name: 'age',
+      type: 'select',
+      label: 'Age',
+      value: '',
+      placeholder: '',
+      disabled: false,
+      hidden: false,
+      options: [
+        {
+          label: '15 years old',
+          value: '15',
+        },
+        {
+          label: '20 years old',
+          value: '20',
+        }
+      ]
+      rules: {
+        required: 'Please select your age.'
+      },
+    }
+  }
+}
+
+const core = {
+  actionType: 'FORM/CHANGE/CUSTOMER',
+  formData: (state, props) => createForm(state),
+  renderUIInputField: (fieldData, updateValue) => {
+    switch (fieldData.type) {
+      case 'text':
+        return <TextInput {...fieldData} onChange={updateValue} />
+      case 'select':
+        return <SelectInput {...fieldData} onChange={updateValue} />
+      default:
+        return <InputField {...fieldData} onChange={updateValue} />
+    }
+  }
+}
+
+@bindFormValidation(core)
+export default class Form extends Component {
+  render() {
+    const { formData, renderInputField, firstError } = this.props
+    return (
+      <div>
+        <h1>Form</h1>
+        { renderInputField(formData.firstname) }
+        { renderInputField(formData.age) }
+        <h4>error: {firstError}</h4>
+      </div>
+    )
+  }
+}
+```
+
 ## <a id="feature-custom-ui"></a>Custom UI
-### Just copy paste again, Let's see in action.
 Building your own custom UI, we are going to use 2nd parameter of renderInputField.
 
 ```js
 import React, { Component } from 'react'
-import InputField, { bindFormValidation } from 'redux-form-manager'
+import { bindFormValidation } from 'redux-form-manager'
 
 const createForm = (state) => {
   return {
