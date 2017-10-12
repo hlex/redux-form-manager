@@ -25,7 +25,7 @@ This project uses library React-Redux-Gamo-boilerplate, React, Redux, React-Redu
 ## Fast date with Demo & Examples
 Live demo: <https://hlex.github.io/redux-form-manager/demo>
 
-The live demo is still running redux-form-manager v2.5.0
+The live demo is still running redux-form-manager v2.6.0
 
 ### Welcome to clone or fork and give me some pull request.
 
@@ -53,7 +53,7 @@ import InputField, { bindFormValidation } from 'redux-form-manager'
 const createForm = (state) => {
   return {
     firstname: {
-      name: 'firstname,
+      name: 'firstname',
       type: 'input',
       label: 'Firstname',
       value: '',
@@ -65,7 +65,7 @@ const createForm = (state) => {
       },
     },
     lastname: {
-      name: 'lastname,
+      name: 'lastname',
       type: 'input',
       label: 'Lastname',
       value: '',
@@ -196,8 +196,8 @@ import InputField, { bindFormValidation } from 'redux-form-manager'
 const createForm = (state) => {
   return {
     firstname: {
-      type: 'input',
       name: 'firstname',
+      type: 'input',
       label: 'Firstname',
       value: '',
       placeholder: 'write down your firstname',
@@ -208,8 +208,8 @@ const createForm = (state) => {
       ],
     },
     lastname: {
-      type: 'input',
       name: 'lastname',
+      type: 'input',
       label: 'Lastname',
       value: '',
       placeholder: 'write down your lastname',
