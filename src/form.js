@@ -45,7 +45,7 @@ const bindFormValidation = (
       subscribe(() => {
         _isMounted && this.setState({ formData: formData(getState(), this.props) })
       })
-      _isMounted && this.setState({
+      this.setState({
         formData: formData(getState(), this.props)
       })
     }

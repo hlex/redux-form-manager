@@ -31,8 +31,7 @@
     "commit": "git-cz",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "prerelease": "npm version patch && npm run build && git push origin master --tags && npm adduser",
-    "release": "npm publish",
-    "postrelease": "git commit -m 'fix: release' && git push"
+    "release": "npm publish"
   },
   "betterScripts": {
     "dev": {
