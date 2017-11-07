@@ -773,6 +773,29 @@ const core = {
 ```
 
 ## <a id="feature-custom-validation"></a>Custom Validation Rules
+
+### Rules build-in list
+```js
+rules: {
+  'required' or 'require', value is not empty string/object or null or undefined.
+  'email'
+  'thaiMobile'
+  'thaiPhone'
+  'thaiId'
+  'thaiFullname'
+  'isEqualLength'
+  'maxLength'
+  'minLength'
+  'alphabet'
+  'number'
+  'correctBracket'
+  'notStartWithSpacing'
+  'notContainDoubleSpacing'
+  'notEndWithSpacing'
+  'notContainSpecialChar'
+}
+```
+
 Creating custom validation rules.
 
 ```js
