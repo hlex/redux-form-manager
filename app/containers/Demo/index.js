@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { bindFormValidation } from '../../../src/index'
@@ -94,8 +95,13 @@ export default class Demo extends React.Component {
           <div className='row'>
             <div className='D-6'>{renderInputField(formData.firstname)}</div>
             <div className='D-6'>{renderInputField(formData.lastname)}</div>
-            <div className='D-6'>{renderInputField(formData.fatherName)}</div>
-            <div className='D-6'>{renderInputField(formData.motherName)}</div>
+            {
+              formData.firstname.value !== '' &&
+              <div>
+                <div className='D-6'>{renderInputField(formData.fatherName)}</div>
+                <div className='D-6'>{renderInputField(formData.motherName)}</div>
+              </div>
+            }
             <div className='D-6 _vcenter'>{renderInputField(formData.age)}</div>
             <div className='D-6 _vcenter'>
               {renderInputField(formData.gender)}
