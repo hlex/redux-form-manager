@@ -1,6 +1,6 @@
 {
   "name": "redux-form-manager",
-  "version": "2.12.3",
+  "version": "2.12.4",
   "description": "Redux form manager",
   "main": "dist/index.js",
   "repository": {
