@@ -94,7 +94,7 @@ const validateRules = (value, rules) => {
     switch (ruleKey) {
       case 'required':
       case 'require':
-        errorMessage = value === '' ? rule : ''
+        errorMessage = value === '' || value === {} || value === undefined ? rule : ''
         break
       case 'email':
         if (!isEmail(value)) errorMessage = rule
