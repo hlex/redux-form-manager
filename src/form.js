@@ -41,10 +41,13 @@ const bindFormValidation = (
 
     componentWillMount() {
       const { getState, subscribe } = this.context.store
-      subscribe(() =>
-        this.setState({ formData: formData(getState(), this.props) })
-      )
-      this.setState({ formData: formData(getState(), this.props), isMounted: true })
+      subscribe(() => {
+        if (this.state.isMounted) this.setState({ formData: formData(getState(), this.props) })
+      })
+      this.setState({
+        formData: formData(getState(), this.props),
+        isMounted: true
+      })
     }
 
     componentWillUnmount() {
@@ -91,8 +94,12 @@ const bindFormValidation = (
         const { value, rules } = fieldData
         const errorMessage = getErrorMessage(value, rules)
         fieldData.errorMessage = errorMessage
-        if (isFunction(renderUIInputField)) { return renderUIInputField(fieldData, this.onUpdateValue) }
-        if (isFunction(options.renderUIInputField)) { return options.renderUIInputField(fieldData, this.onUpdateValue) }
+        if (isFunction(renderUIInputField)) {
+          return renderUIInputField(fieldData, this.onUpdateValue)
+        }
+        if (isFunction(options.renderUIInputField)) {
+          return options.renderUIInputField(fieldData, this.onUpdateValue)
+        }
         console.error(
           'Cannot render input field please define function renderUIInputField to return React Component'
         )
@@ -102,7 +109,9 @@ const bindFormValidation = (
 
     validatePriority = () => {
       const { getState } = this.context.store
-      if (isFunction(mapStateToValidationPriority)) { return mapStateToValidationPriority(getState()) }
+      if (isFunction(mapStateToValidationPriority)) {
+        return mapStateToValidationPriority(getState())
+      }
       return false
     }
 
