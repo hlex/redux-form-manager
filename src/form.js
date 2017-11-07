@@ -35,27 +35,22 @@ const bindFormValidation = (
     }
 
     state = {
-      isMounted: false,
       formData: {}
     }
 
-    componentWillMount() {
+    componentWillMount = () => {
       const { getState, subscribe } = this.context.store
       subscribe(() => {
-        if (this) this.setState({ formData: formData(getState(), this.props) })
+        this.setState({ formData: formData(getState(), this.props) })
       })
-      if (this) {
-        this.setState({
-          formData: formData(getState(), this.props),
-          isMounted: true
-        })
-      }
+      this.setState({
+        formData: formData(getState(), this.props)
+      })
     }
 
-    componentWillUnmount() {
-      this.setState({
-        isMounted: false
-      })
+    componentWillUnmount = () => {
+      const { subscribe } = this.context.store
+      subscribe(() => {})
     }
 
     onUpdateValue = (value, key) => {
@@ -92,21 +87,19 @@ const bindFormValidation = (
     }
 
     renderInputField = (fieldData, renderUIInputField) => {
-      if (this.state.isMounted) {
-        const { value, rules } = fieldData
-        const errorMessage = getErrorMessage(value, rules)
-        fieldData.errorMessage = errorMessage
-        if (isFunction(renderUIInputField)) {
-          return renderUIInputField(fieldData, this.onUpdateValue)
-        }
-        if (isFunction(options.renderUIInputField)) {
-          return options.renderUIInputField(fieldData, this.onUpdateValue)
-        }
-        console.error(
-          'Cannot render input field please define function renderUIInputField to return React Component'
-        )
-        return 'Unable to render UIInputField'
+      const { value, rules } = fieldData
+      const errorMessage = getErrorMessage(value, rules)
+      fieldData.errorMessage = errorMessage
+      if (isFunction(renderUIInputField)) {
+        return renderUIInputField(fieldData, this.onUpdateValue)
       }
+      if (isFunction(options.renderUIInputField)) {
+        return options.renderUIInputField(fieldData, this.onUpdateValue)
+      }
+      console.error(
+        'Cannot render input field please define function renderUIInputField to return React Component'
+      )
+      return 'Unable to render UIInputField'
     }
 
     validatePriority = () => {
