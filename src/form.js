@@ -2,8 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import validateRules from './validation'
 
-let _isMounted = false
-
 const isFunction = func => func && typeof func === 'function'
 const getErrorMessage = (value, rules) => validateRules(value, rules)
 const getFirstError = (formData, priority) => {
@@ -37,15 +35,15 @@ const bindFormValidation = (
     }
 
     state = {
+      id: Date.now(),
       formData: {}
     }
 
     componentWillMount = () => {
-      console.log('componentWillMount')
+      console.log('componentWillMount', this.state.id)
       const { getState, subscribe } = this.context.store
       subscribe(() => {
-        console.log('subscribe', _isMounted, getState())
-        _isMounted !== false && this.setState({ formData: formData(getState(), this.props) })
+        this.setState({ formData: formData(getState(), this.props) })
       })
       this.setState({
         formData: formData(getState(), this.props)
@@ -53,13 +51,11 @@ const bindFormValidation = (
     }
 
     componentDidMount = () => {
-      console.log('componentDidMount')
-      _isMounted = true
+      console.log('componentDidMount', this.state.id)
     }
 
     componentWillUnmount = () => {
-      console.log('componentWillUnmount')
-      _isMounted = false
+      console.log('componentWillUnmount', this.state.id)
     }
 
     onUpdateValue = (value, key) => {
