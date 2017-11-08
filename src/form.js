@@ -42,7 +42,7 @@ const bindFormValidation = (
     componentWillMount = () => {
       console.log('componentWillMount', this.state.id)
       const { getState, subscribe } = this.context.store
-      subscribe(() => {
+      this.unsubscribe = subscribe(() => {
         if (_isMounted) {
           console.log('subscribe', this.state.id)
           this.setState({ formData: formData(getState(), this.props) })
@@ -61,6 +61,7 @@ const bindFormValidation = (
     componentWillUnmount = () => {
       console.log('componentWillUnmount', this.state.id)
       _isMounted = false
+      this.unsubscribe()
     }
 
     onUpdateValue = (value, key) => {
