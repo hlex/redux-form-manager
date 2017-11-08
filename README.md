@@ -4,6 +4,21 @@ A Form control built with and for React with Redux. Initially built for use in R
 
 ### If you liked, gimme a star, Thanks.
 
+## Release Issues
+### Latest version is `v2.13.0`
+* `v2.13.0`
+  - Fixed bugs Warning: setState(...): Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component. This is a no-op. Please check the code for the FormValidation component. (thanks for [KIRAN H](https://github.com/KIRAN-H))
+* `v2.12.0`
+  - When `errorMessage` is not empty, afterFieldChange won't trigger. (thanks for [KIRAN H](https://github.com/KIRAN-H))
+  - `errorMessage` is assigned to '' (empty String) when value is valid. (#issue2 closed thanks for [GA-MO](https://github.com/GA-MO))
+* `v2.10.0`
+  - Update React to version 15.6.0
+  - Using PropTypes from 'prop-types'
+* `v2.9.0`
+  - Add feature `props in formData` formData: (state, props) => {}
+
+
+
 ## Special Thanks to 'GA-MO'
 [![alt text][logo]](https://github.com/GA-MO)
 
@@ -26,7 +41,7 @@ This project uses library React-Redux-Gamo-boilerplate, React, Redux, React-Redu
 ## Fast date with Demo & Examples
 Live demo: <https://hlex.github.io/redux-form-manager/demo>
 
-The live demo is still running redux-form-manager v2.6.0
+The live demo is still running redux-form-manager `v13.0.0`
 
 ### Welcome to clone or fork and give me some pull request.
 
