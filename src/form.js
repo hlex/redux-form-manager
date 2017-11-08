@@ -28,7 +28,6 @@ const bindFormValidation = (
   mapStateToValidationPriority = []
 ) => WrappedComponent => {
   const { actionType = undefined, formData } = options
-  let _isMounted = false
   return class FormValidation extends React.Component {
     static contextTypes = {
       store: PropTypes.shape({})
@@ -40,27 +39,16 @@ const bindFormValidation = (
     }
 
     componentWillMount = () => {
-      console.log('componentWillMount', this.state.id)
       const { getState, subscribe } = this.context.store
       this.unsubscribe = subscribe(() => {
-        if (_isMounted) {
-          console.log('subscribe', this.state.id)
-          this.setState({ formData: formData(getState(), this.props) })
-        }
+        this.setState({ formData: formData(getState(), this.props) })
       })
       this.setState({
         formData: formData(getState(), this.props)
       })
     }
 
-    componentDidMount = () => {
-      console.log('componentDidMount', this.state.id)
-      _isMounted = true
-    }
-
     componentWillUnmount = () => {
-      console.log('componentWillUnmount', this.state.id)
-      _isMounted = false
       this.unsubscribe()
     }
 
