@@ -43,7 +43,10 @@ const bindFormValidation = (
       console.log('componentWillMount', this.state.id)
       const { getState, subscribe } = this.context.store
       subscribe(() => {
-        _isMounted && this.setState({ formData: formData(getState(), this.props) })
+        if (_isMounted) {
+          console.log('subscribe', this.state.id)
+          this.setState({ formData: formData(getState(), this.props) })
+        }
       })
       this.setState({
         formData: formData(getState(), this.props)
