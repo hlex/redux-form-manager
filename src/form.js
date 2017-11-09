@@ -72,11 +72,13 @@ const bindFormValidation = (
           isFunction(afterFieldChange) &&
           isFunction(afterFieldChange(dispatch, getState())[key])
         ) {
-          const { rules } = fieldData
-          const errorMessage = getErrorMessage(value, rules)
-          errorMessage &&
-            errorMessage !== '' &&
+          if (fieldData.afterUpdateWhenValid || false) {
+            const { rules } = fieldData
+            const errorMessage = getErrorMessage(value, rules)
+            if (errorMessage === '') afterFieldChange(dispatch, getState())[key](value, key)
+          } else {
             afterFieldChange(dispatch, getState())[key](value, key)
+          }
         }
       } else {
         console.error(

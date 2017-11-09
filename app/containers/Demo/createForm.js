@@ -43,12 +43,13 @@ const createForm = (state) => {
       label: 'Firstname',
       value: customer.firstname,
       disabled: false,
+      afterUpdateWhenValid: true,
       rules: {
         required: 'กรุณาระบุชื่อ',
         customValidate: [
           {
             valid: (value) => {
-              return value.indexOf('redux') > 0
+              return value.indexOf('redux') >= 0
             },
             message: 'ต้องมีคำว่า redux'
           }
