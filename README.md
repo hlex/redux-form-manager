@@ -5,7 +5,12 @@ A Form control built with and for React with Redux. Initially built for use in R
 ### If you liked, gimme a star, Thanks.
 
 ## Release Issues
-### Latest version is `v2.14.0`
+### Latest version is `v2.16.0`
+* `v2.16.0`
+  - Fixed bugs rules `equalLength`, `maxLength`, `minLength` cannot validate and show message properly.
+  - Update rules usage in README.md
+* `v2.15.0`
+  - Add `lodash` to peerDependencies for features updateNestedFieldData
 * `v2.14.0`
   - Add feature - add props `afterUpdateWhenValid` (default = false) (thanks for [KIRAN H](https://github.com/KIRAN-H))
 * `v2.13.0`
@@ -794,22 +799,32 @@ const core = {
 ### Rules build-in list
 ```js
 rules: {
-  'required' or 'require', value is not empty string/object or null or undefined.
-  'email'
-  'thaiMobile'
-  'thaiPhone'
-  'thaiId'
-  'thaiFullname'
-  'isEqualLength'
-  'maxLength'
-  'minLength'
-  'alphabet'
-  'number'
-  'correctBracket'
-  'notStartWithSpacing'
-  'notContainDoubleSpacing'
-  'notEndWithSpacing'
-  'notContainSpecialChar'
+  'required': `${message}`,
+  'require': `${message}`,
+  'email': `${message}`,
+  'thaiMobile': `${message}`,
+  'thaiPhone': `${message}`,
+  'thaiId': `${message}`,
+  'thaiFullname': `${message}`,
+  'equalLength': {
+    length: `${length}`,
+    message: `${message}`
+  },
+  'maxLength': {
+    maxLength: `${length}`,
+    message: `${message}`
+  },
+  'minLength': {
+    minLength: `${length}`,
+    message: `${message}`
+  },
+  'alphabet': `${message}`,
+  'number': `${message}`,
+  'correctBracket': `${message}`,
+  'notStartWithSpacing': `${message}`,
+  'notContainDoubleSpacing': `${message}`,
+  'notEndWithSpacing': `${message}`,
+  'notContainSpecialChar': `${message}`,
 }
 ```
 

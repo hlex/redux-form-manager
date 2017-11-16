@@ -111,22 +111,26 @@ const validateRules = (value, rules) => {
       case 'thaiFullname':
         if (!isThaiFullname(value)) errorMessage = rule
         break
-      case 'isEqualLength':
-        if (!isEqualLength(value)) errorMessage = rule
+      case 'equalLength':
+        if (!rule.length) {
+          console.error('isEqualLength error. Please send length key')
+          break
+        }
+        if (!isEqualLength(value, rule.length)) errorMessage = rule.message
         break
       case 'maxLength':
         if (!rule.maxLength) {
           console.error('maxLength error. Please send maxLength key')
           break
         }
-        if (moreThanMaxLength(value, rule.maxLength)) errorMessage = rule
+        if (moreThanMaxLength(value, rule.maxLength)) errorMessage = rule.message
         break
       case 'minLength':
         if (!rule.minLength) {
           console.error('minLength error. Please send minLength key')
           break
         }
-        if (lessThanMinLength(value, rule.minLength)) errorMessage = rule
+        if (lessThanMinLength(value, rule.minLength)) errorMessage = rule.message
         break
       case 'alphabet':
         if (!isAlphabet(value)) errorMessage = rule

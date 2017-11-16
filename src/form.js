@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import _ from 'lodash'
 import validateRules from './validation'
 
 const isFunction = func => func && typeof func === 'function'
@@ -54,7 +55,7 @@ const bindFormValidation = (
 
     onUpdateValue = (value, key) => {
       const { dispatch, getState } = this.context.store
-      const fieldData = formData(getState(), this.props)[key]
+      const fieldData = _.get(formData(getState(), this.props), key)
       if (!fieldData) {
         console.error(
           `Cannot get fieldData in formData at key ${key}. Please recheck your fieldData key`

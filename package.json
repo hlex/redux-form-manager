@@ -1,6 +1,6 @@
 {
   "name": "redux-form-manager",
-  "version": "2.14.0",
+  "version": "2.16.0",
   "description": "Redux form manager",
   "main": "dist/index.js",
   "repository": {
@@ -68,9 +68,10 @@
     }
   },
   "peerDependencies": {
+    "lodash": "^4.17.4",
     "react": "^15.6.1",
-    "redux": "^3.6.0",
-    "react-redux": "^5.0.2"
+    "react-redux": "^5.0.2",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
