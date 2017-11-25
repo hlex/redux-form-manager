@@ -1,3 +1,3 @@
-import bindFormValidation from './form'
+import bindFormValidation, { getErrorMessage } from './form'
 
-export { bindFormValidation }
+export { bindFormValidation, getErrorMessage }

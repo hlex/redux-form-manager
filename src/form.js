@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import validateRules from './validation'
 
 const isFunction = func => func && typeof func === 'function'
-const getErrorMessage = (value, rules) => validateRules(value, rules)
+export const getErrorMessage = (value, rules) => validateRules(value, rules)
 const getFirstError = (formData, priority) => {
   if (priority) {
     for (const key of priority) {
@@ -23,30 +23,80 @@ const getFirstError = (formData, priority) => {
   return ''
 }
 
+const shallowEqual = (objA, objB) => {
+  if (objA === objB) {
+    return true
+  }
+
+  if (
+    typeof objA !== 'object' ||
+    objA === null ||
+    typeof objB !== 'object' ||
+    objB === null
+  ) {
+    return false
+  }
+
+  var keysA = Object.keys(objA)
+  var keysB = Object.keys(objB)
+
+  if (keysA.length !== keysB.length) {
+    return false
+  }
+
+  // Test for A's keys different from B.
+  var bHasOwnProperty = hasOwnProperty.bind(objB)
+  for (var i = 0; i < keysA.length; i++) {
+    if (!bHasOwnProperty(keysA[i]) || objA[keysA[i]] !== objB[keysA[i]]) {
+      return false
+    }
+  }
+
+  return true
+}
+
+const shallowCompare = (instance, nextProps, nextState) => {
+  return (
+    !shallowEqual(instance.state, nextState)
+  )
+}
+
 const bindFormValidation = (
   options,
   afterFieldChange = {},
   mapStateToValidationPriority = []
 ) => WrappedComponent => {
-  const { actionType = undefined, formData } = options
-  return class FormValidation extends React.Component {
+  const { actionType = undefined, formData, getFormError = undefined } = options
+  return class FormValidation extends PureComponent {
     static contextTypes = {
       store: PropTypes.shape({})
     }
 
     state = {
       id: Date.now(),
-      formData: {}
+      formData: {},
+      firstError: ''
+    }
+
+    shouldComponentUpdate = (nextProps, nextState) => {
+      const { dispatch, getState } = this.context.store
+      const currFormData = this.state.formData
+      const nextFormData = nextState.formData
+      const currFirstError = getFirstError(currFormData)
+      const nextFirstError = getFirstError(nextFormData)
+      if ((currFirstError !== nextFirstError) && isFunction(getFormError)) getFormError(getFirstError(nextFormData), dispatch, getState())
+      return shallowCompare(this, nextProps, nextState)
     }
 
     componentWillMount = () => {
-      const { getState, subscribe } = this.context.store
+      const { getState, dispatch, subscribe } = this.context.store
       this.unsubscribe = subscribe(() => {
-        this.setState({ formData: formData(getState(), this.props) })
+        this.setState({ formData: formData(getState(), this.props), firstError: getFirstError(this.state.formData, this.validatePriority()) })
       })
       this.setState({
         formData: formData(getState(), this.props)
       })
+      getFormError(getFirstError(formData(getState(), this.props)), dispatch, getState())
     }
 
     componentWillUnmount = () => {
@@ -58,7 +108,9 @@ const bindFormValidation = (
       const fieldData = _.get(formData(getState(), this.props), key)
       if (!fieldData) {
         console.error(
-          `Cannot get fieldData in formData at key ${key}. Please recheck your fieldData key`
+          `Cannot get fieldData in formData at key '${
+            key
+          }'. Please recheck your formData`
         )
         return
       }
@@ -76,7 +128,7 @@ const bindFormValidation = (
           if (fieldData.afterUpdateWhenValid || false) {
             const { rules } = fieldData
             const errorMessage = getErrorMessage(value, rules)
-            if (errorMessage === '') afterFieldChange(dispatch, getState())[key](value, key)
+            if (errorMessage === '') { afterFieldChange(dispatch, getState())[key](value, key) }
           } else {
             afterFieldChange(dispatch, getState())[key](value, key)
           }
