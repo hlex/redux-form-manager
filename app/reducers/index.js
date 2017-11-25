@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import todo from './todo'
 import customer from './customer'
+import masterapp from './masterapp'
+import product from './product'
 
 export default combineReducers({
-  todo,
-  customer
+  masterapp,
+  customer,
+  product
 })

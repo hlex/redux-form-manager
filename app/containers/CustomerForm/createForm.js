@@ -35,10 +35,9 @@ const createForm = (state) => {
   const isMale = customer.gender === 'MALE'
   return {
     firstname: {
+      name: 'firstname',
       actionType: 'FORM/CHANGE/CUSTOMER',
       type: 'text',
-      key: 'firstname',
-      name: 'firstname',
       placeholder: 'this is first name',
       label: 'Firstname',
       value: customer.firstname,
@@ -172,33 +171,7 @@ const createForm = (state) => {
       rules: {
         required: 'กรุณาเลือกเครื่องดื่ม'
       }
-    },
-    products: [
-      {
-        name: {
-          type: 'text',
-          key: 'products.0.name',
-          name: 'products.0.name',
-          label: 'Product Name',
-          value: '',
-          disabled: false,
-          rules: {
-            // required: 'กรุณาเลือกเครื่องดื่ม'
-          }
-        },
-        code: {
-          type: 'text',
-          key: 'products.1.code',
-          name: 'products.1.code',
-          label: 'Product Code',
-          value: '',
-          disabled: false,
-          rules: {
-            // required: 'กรุณาเลือกเครื่องดื่ม'
-          }
-        }
-      }
-    ]
+    }
   }
 }
 
