@@ -5,7 +5,11 @@ A Form control built with and for React with Redux. Initially built for use in R
 ### If you liked, gimme a star, Thanks.
 
 ## Release Issues
-### Latest version is `v2.16.0`
+### Latest version is `v3.0.0`
+* `v3.0.0`
+  - Update feature core.getFormError to dispatch firstError of formData to reducer.
+  - Update feature export new function { getErrorMessage } from 'redux-form-manager'
+  - Update New Demo <https://hlex.github.io/redux-form-manager/demo>
 * `v2.16.0`
   - Fixed bugs rules `equalLength`, `maxLength`, `minLength` cannot validate and show message properly.
   - Update rules usage in README.md
@@ -48,7 +52,7 @@ This project uses library React-Redux-Gamo-boilerplate, React, Redux, React-Redu
 ## Fast date with Demo & Examples
 Live demo: <https://hlex.github.io/redux-form-manager/demo>
 
-The live demo is still running redux-form-manager `v2.14.0`
+The live demo is still running redux-form-manager `v3.0.0`
 
 ### Welcome to clone or fork and give me some pull request.
 
