@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import validateRules from './validation'
@@ -67,7 +67,7 @@ const bindFormValidation = (
   mapStateToValidationPriority = []
 ) => WrappedComponent => {
   const { actionType = undefined, formData, getFormError = undefined } = options
-  return class FormValidation extends PureComponent {
+  return class FormValidation extends Component {
     static contextTypes = {
       store: PropTypes.shape({})
     }
@@ -84,7 +84,7 @@ const bindFormValidation = (
       const nextFormData = nextState.formData
       const currFirstError = getFirstError(currFormData)
       const nextFirstError = getFirstError(nextFormData)
-      if ((currFirstError !== nextFirstError) && isFunction(getFormError)) getFormError(getFirstError(nextFormData), dispatch, getState())
+      if ((currFirstError !== nextFirstError) && getFormError && isFunction(getFormError)) getFormError(getFirstError(nextFormData), dispatch, getState())
       return shallowCompare(this, nextProps, nextState)
     }
 
@@ -96,7 +96,9 @@ const bindFormValidation = (
       this.setState({
         formData: formData(getState(), this.props)
       })
-      getFormError(getFirstError(formData(getState(), this.props)), dispatch, getState())
+      if (getFormError && isFunction(getFormError)) {
+        getFormError(getFirstError(formData(getState(), this.props)), dispatch, getState())
+      }
     }
 
     componentWillUnmount = () => {
